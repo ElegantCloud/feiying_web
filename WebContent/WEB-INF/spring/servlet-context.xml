@@ -27,8 +27,6 @@
 			<mvc:mapping path="/mobile/share/**"/>
 			<mvc:mapping path="/mobile/recv"/>
 			<mvc:mapping path="/mobile/recv/**"/>
-			<mvc:mapping path="/business"/>
-			<mvc:mapping path="/business/**"/>
 			<mvc:mapping path="/mobile/system/auth"/>
 			<bean class="net.feixun.web.mvc.APIAuthInterceptor" />
 		</mvc:interceptor>

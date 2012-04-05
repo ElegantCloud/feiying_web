@@ -25,15 +25,14 @@ public class Share {
 	public static String shareVideo(String username, String sourceId,
 			String phoneStr, String info, int channel) {
 		String result = "";
-		result = checkRegisterPhone(phoneStr);
+		String[] phoneList = phoneStr.split(",");
+		result = Video.record_fy_video_info(sourceId, Fav.SHARE, Fav.INCREASE,
+				phoneList.length); // 视频分享量+1
 		if (result.equals("0")) {
-			String[] phoneList = phoneStr.split(",");
-			result = Video.record_fy_video_info(sourceId, Fav.SHARE,
-					Fav.INCREASE, phoneList.length); // 视频分享量+1
-			if (result.equals("0")) {
-				int share_id = create_fy_share(username, sourceId); // 视频与用户关联
-				if (share_id != 0) {
-					for (String phone : phoneList) {
+			int share_id = create_fy_share(username, sourceId); // 视频与用户关联
+			if (share_id != 0) {
+				for (String phone : phoneList) {
+					if (ValidatePattern.isValidMobilePhone(phone)) {
 						result = create_fy_share_recv(share_id, phone); // 视频与用户关联
 					}
 				}
@@ -190,13 +189,8 @@ public class Share {
 			int currPage, int pageSize) throws SQLException {
 		String sql = "SELECT s.share_id,"
 				+ "UNIX_TIMESTAMP(s.created_time) as share_time,"
-				+ "v.source_id," 
-				+ "v.title," 
-				+ "v.image_url," 
-				+ "v.channel,"
-				+ "v.play_count," 
-				+ "v.fav_count," 
-				+ "v.share_count "
+				+ "v.source_id," + "v.title," + "v.image_url," + "v.channel,"
+				+ "v.play_count," + "v.fav_count," + "v.share_count "
 				+ "FROM fy_share s "
 				+ "LEFT JOIN fy_video v on s.source_id = v.source_id "
 				+ "WHERE s.send = ? AND s.send_state = ? "
@@ -231,16 +225,10 @@ public class Share {
 	 */
 	public static List<Map<String, Object>> get_fy_share_recv_list(
 			String username, int currPage, int pageSize) throws SQLException {
-		String sql = "SELECT r.share_id," 
-				+ "s.send,"
+		String sql = "SELECT r.share_id," + "s.send,"
 				+ "UNIX_TIMESTAMP(s.created_time) as share_time,"
-				+ "v.source_id," 
-				+ "v.title," 
-				+ "v.image_url," 
-				+ "v.channel,"
-				+ "v.play_count," 
-				+ "v.fav_count," 
-				+ "v.share_count "
+				+ "v.source_id," + "v.title," + "v.image_url," + "v.channel,"
+				+ "v.play_count," + "v.fav_count," + "v.share_count "
 				+ "FROM fy_share_recv r "
 				+ "LEFT JOIN fy_share s ON r.share_id = s.share_id "
 				+ "LEFT JOIN fy_video v ON s.source_id = v.source_id "
