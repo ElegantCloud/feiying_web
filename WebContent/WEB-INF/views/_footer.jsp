@@ -2,5 +2,5 @@
     pageEncoding="utf-8"%>
     
 <div class="footer">
-	<img src="/feixun/images/logo2.png" />
+	<img src="/feiying/images/logo2.png" />
 </div>

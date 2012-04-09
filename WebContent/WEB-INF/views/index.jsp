@@ -4,17 +4,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link href="/feixun/css/css.css" type="text/css" rel="stylesheet" />
+<link href="/feiying/css/css.css" type="text/css" rel="stylesheet" />
 <title>安徽联通飞影</title>
 </head>
 <body>
 	<div id="wrap">
 		<div class="master">
 			<div class="logo">
-				<img src="/feixun/images/big_logo1.png" />
+				<img src="/feiying/images/big_logo1.png" />
 			</div>
 			<div class="phone">
-				<img src="/feixun/images/pic.jpg" />
+				<img src="/feiying/images/pic.jpg" />
 			</div>
 			<div class="container">
 				<div class="nr">
@@ -24,18 +24,18 @@
 				</div>
 				<div class="xiazai">
 					<ul>
-						<li><a href="/feixun/appget/android"><img
-								src="/feixun/images/download1.png" />
+						<li><a href="/feiying/appget/android"><img
+								src="/feiying/images/download1.png" />
 						</a>
 						</li>
-						<li><a href="#"><img src="/feixun/images/download2.png" />
+						<li><a href="#"><img src="/feiying/images/download2.png" />
 						</a>
 						</li>
 					</ul>
 				</div>
 			</div>
 			<div class="logo2">
-				<img src="/feixun/images/big_logo2.png" />
+				<img src="/feiying/images/big_logo2.png" />
 			</div>
 		</div>
 		<div class="footer">2012 版权所有,安徽联通</div>

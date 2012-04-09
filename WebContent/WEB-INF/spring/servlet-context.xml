@@ -8,7 +8,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- Scans the classpath of this application for @Components to deploy as beans -->
-	<context:component-scan base-package="net.feixun.web.mvc.controller" />
+	<context:component-scan base-package="net.feiying.web.mvc.controller" />
 
 	<!-- Configures the @Controller programming model -->
 	<mvc:annotation-driven />
@@ -28,7 +28,7 @@
 			<mvc:mapping path="/mobile/recv"/>
 			<mvc:mapping path="/mobile/recv/**"/>
 			<mvc:mapping path="/mobile/system/auth"/>
-			<bean class="net.feixun.web.mvc.APIAuthInterceptor" />
+			<bean class="net.feiying.web.mvc.APIAuthInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
 

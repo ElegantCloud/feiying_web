@@ -2,7 +2,7 @@
 	pageEncoding="utf-8"%>
 
 <div class="header">
-	<img src="/feixun/images/logo1.png" />
+	<img src="/feiying/images/logo1.png" />
 </div>
 <div class="product">
 	<div class="des">
@@ -11,7 +11,7 @@
 		<p>退订飞影业务发送TDFY到1065583398。</p>
 	</div>
     <div class="download">
-    	<a href="/feixun/appget/android"><img src="/feixun/images/download1.png" /></a>
-    	<a href="#"><img src="/feixun/images/download2.png" /></a>
+    	<a href="/feiying/appget/android"><img src="/feiying/images/download1.png" /></a>
+    	<a href="#"><img src="/feiying/images/download2.png" /></a>
     </div>
 </div>

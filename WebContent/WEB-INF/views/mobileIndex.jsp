@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="Default" />
 <meta name="viewport"
 	content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<link href="/feixun/css/share.css" type="text/css" rel="stylesheet" />
+<link href="/feiying/css/share.css" type="text/css" rel="stylesheet" />
 <title>安徽联通飞影</title>
 </head>
 
