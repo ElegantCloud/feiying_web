@@ -33,6 +33,7 @@ public class Movie {
 				+ "v.share_count " 
 				+ "FROM fy_movie m "
 				+ "LEFT JOIN fy_video v ON m.source_id = v.source_id "
+				+ "WHERE v.status >= 100 "
 				+ "ORDER BY v.created_time DESC";
 		return DBHelper.getInstance().queryPager(sql, currPage, pageSize);
 	}
@@ -44,7 +45,9 @@ public class Movie {
 	 * @throws SQLException
 	 */
 	public static int getListCount() throws SQLException {
-		String sql = "SELECT count(source_id) FROM fy_movie";
+		String sql = "SELECT count(m.source_id) " +
+				"FROM fy_movie AS m LEFT JOIN fy_video AS v ON m.source_id = v.source_id " +
+				"WHERE v.status >= 100 ";
 		return DBHelper.getInstance().count(sql);
 	}
 

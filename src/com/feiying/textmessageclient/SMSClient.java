@@ -8,13 +8,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
 
 import com.feiying.utity.ConfigManager;
 
 //TODO: need a HTTP connection pool
 public class SMSClient {
-	
+	private static Log log = LogFactory.getLog(SMSClient.class);
 	private static SMSClient _instance;
 
 	private String baseURI;
@@ -59,6 +61,7 @@ public class SMSClient {
 	
 	public void sendValidateCode(String phone, String validateCode) throws IOException, ParserConfigurationException, SAXException{
 		String content = "验证码：" + validateCode + " [联通飞讯]";
-		sendTextMessage(phone, content);
+		TextMessageResponse res = sendTextMessage(phone, content);
+		log.info("sms gateway return: " + res.getCode());
 	}
 }

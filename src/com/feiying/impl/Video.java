@@ -29,7 +29,8 @@ public class Video {
 				+ "v.fav_count," 
 				+ "v.share_count "
 				+ "FROM fy_short_video s "
-				+ "LEFT JOIN fy_video v ON s.source_id = v.source_id "
+				+ "LEFT JOIN fy_video v ON s.source_id = v.source_id " 
+				+ "WHERE v.status >= 100 "
 				+ "ORDER BY v.created_time DESC";
 		return DBHelper.getInstance().queryPager(sql, currPage, pageSize);
 	}
@@ -41,7 +42,9 @@ public class Video {
 	 * @throws SQLException
 	 */
 	public static int getListCount() throws SQLException {
-		String sql = "SELECT count(source_id) FROM fy_short_video";
+		String sql = "SELECT count(s.source_id) " +
+				"FROM fy_short_video AS s LEFT JOIN fy_video AS v ON s.source_id = v.source_id " +
+				"WHERE v.status >= 100 ";
 		return DBHelper.getInstance().count(sql);
 	}
 
@@ -68,7 +71,7 @@ public class Video {
 				+ "v.share_count "
 				+ "FROM fy_short_video s "
 				+ "LEFT JOIN fy_video v ON s.source_id = v.source_id "
-				+ "WHERE v.channel = ? " 
+				+ "WHERE v.channel = ? AND v.status >= 100 " 
 				+ "ORDER BY v.created_time DESC";
 		Object[] params = new Object[] { channel };
 		return DBHelper.getInstance().queryPager(sql, params, currPage,
@@ -86,7 +89,7 @@ public class Video {
 		String sql = "SELECT count(s.source_id) " 
 				+ "FROM fy_short_video s "
 				+ "LEFT JOIN fy_video v ON s.source_id = v.source_id "
-				+ "WHERE v.channel = ?";
+				+ "WHERE v.channel = ? AND v.status >= 100 ";
 		Object[] params = new Object[] { channel };
 		return DBHelper.getInstance().count(sql, params);
 	}

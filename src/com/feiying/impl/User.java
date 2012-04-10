@@ -37,12 +37,9 @@ public class User {
 		String phoneCode = RandomString.validateCode();
 		log.info("phone code: " + phoneCode);
 		try {
-			// result = checkRegisterPhone(phone);
-			// if (result.equals("0")) {
 			session.setAttribute("phonenumber", phone);
 			session.setAttribute("phonecode", phoneCode);
 			SMSClient.getInstance().sendValidateCode(phone, phoneCode);
-			// }
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
@@ -262,6 +259,7 @@ public class User {
 			String businessStatus = DBHelper.getInstance().scalar(sql, new Object[] { phone });
 
 			if (businessStatus != null) {
+				log.info("existed user");
 				status = businessStatus;
 				if (brand.equals("apple")) {
 					status = "opened";
@@ -271,10 +269,11 @@ public class User {
 				DBHelper.getInstance().update(sql,
 						new Object[] { userkey, phone });
 			} else {
+				log.info("new user");
 				if (brand.equals("apple")) {
 					status = "opened";
 				}
-				sql = "INSERT INTO fy_user (username, userpass, userkey) VALUES(?,'',?)";
+				sql = "INSERT INTO fy_user (username, userkey) VALUES(?,?)";
 				DBHelper.getInstance().update(sql,
 						new Object[] { phone, userkey });
 				obj.put("status", status);
@@ -286,7 +285,6 @@ public class User {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
 		return obj;
 	}
 }
