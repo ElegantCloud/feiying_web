@@ -17,7 +17,7 @@ public class ContextLoaderServlet extends ContextLoaderListener {
 	public void contextDestroyed(ServletContextEvent event) {
 		//
 		DBHelper.getInstance().closeAll();
-		DBHelper.getCoreSeekInstance().closeAll();	
+//		DBHelper.getCoreSeekInstance().closeAll();	
 	}
 
 	@Override
@@ -34,7 +34,7 @@ public class ContextLoaderServlet extends ContextLoaderListener {
 				.getRequiredWebApplicationContext(context);
 		
 		DBHelper.getInstance().setAppContext(appContext);
-		DBHelper.getCoreSeekInstance().setAppContext(appContext);
+//		DBHelper.getCoreSeekInstance().setAppContext(appContext);
 	}
 
 }

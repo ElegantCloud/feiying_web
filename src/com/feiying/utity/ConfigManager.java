@@ -99,8 +99,36 @@ public class ConfigManager {
 	 * @return
 	 */
 	public String getUrl() {
-		// TODO Auto-generated method stub
 		return prop.getProperty("url");
 	}
 
+	/**
+	 * get sphinx search server host
+	 * @return
+	 */
+	public String getSphinxHost() {
+		return prop.getProperty("sphinx_host");
+	}
+
+	/**
+	 * get sphinx search server port
+	 * @return
+	 */
+	public int getSphinxPort() {
+		String p = prop.getProperty("sphinx_port", "9312");
+		int port = 9312;
+		try {
+			port = Integer.parseInt(p);
+		} catch (NumberFormatException e) {
+		}
+		return port;
+	}
+	
+	/**
+	 * get default index in sphinx
+	 * @return
+	 */
+	public String getSphinxIndex() {
+		return prop.getProperty("sphinx_index", "feiying_mysql");
+	}
 }

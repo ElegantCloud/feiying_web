@@ -61,6 +61,7 @@
 		</property>				 		
 	</bean>	
 	
+	<!--  
 	<bean id="dataSource_coreseek_c3p0" 
 		class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
@@ -108,4 +109,5 @@
 			<value>100</value>
 		</property>				 		
 	</bean>	
+	-->
 </beans>

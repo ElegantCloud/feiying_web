@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,13 +20,14 @@ import com.feiying.utity.Pager;
 
 @Controller
 public class SearchMobile {
+	private static Log log = LogFactory.getLog(SearchMobile.class);
 	public static final int pageSize = 20;
 
 	@RequestMapping("/mobile/search")
 	public void search(
 			@RequestParam(value = "offset", required = false, defaultValue = "1") int offset,
 			@RequestParam(value = "searchTitle", required = false, defaultValue = "") String searchTitle,
-			HttpServletResponse response) throws Exception {
+			HttpServletResponse response) throws IOException{ 
 		String url = "/mobile/search?searchTitle=" + searchTitle;
 		VideoSearchBean videoSearchBean = null;
 		int count = 0;
@@ -33,10 +36,20 @@ public class SearchMobile {
 			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 			videoSearchBean.setList(list);
 		} else {
-			videoSearchBean = VideoSearch
-					.getList(offset, pageSize, searchTitle);
-			Map<String, Object> countMap = videoSearchBean.getCountMap();
-			count = Integer.parseInt((String) countMap.get("total_found"));
+//			videoSearchBean = VideoSearch
+//					.getList(offset, pageSize, searchTitle);
+			
+			try {
+				videoSearchBean = VideoSearch.queryInSphinx(offset, pageSize, searchTitle);
+				Map<String, Integer> countMap = videoSearchBean.getCountMap();
+				count =  countMap.get("total_found");
+			} catch (Exception e) {
+				log.info(e.getMessage());
+				videoSearchBean = new VideoSearchBean();
+				List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+				videoSearchBean.setList(list);
+			} 
+			
 		}
 		if (count > 0) {
 			VideoSearch.countKeyword(searchTitle);
