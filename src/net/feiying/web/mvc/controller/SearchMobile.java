@@ -51,7 +51,7 @@ public class SearchMobile {
 			} 
 			
 		}
-		if (count > 0) {
+		if (count > 0 && offset == 1) {
 			VideoSearch.countKeyword(searchTitle);
 		}
 		Pager pager = new Pager(offset, pageSize, count, url);

@@ -103,8 +103,13 @@ public class Series {
 				+ "video_url " 
 				+ "FROM fy_tv_episode "
 				+ "WHERE source_id = ? " 
+				+ "AND episode_index BETWEEN 1 AND "
+				+ "( "
+				+ "SELECT episode_count FROM fy_tv_series "
+				+ "WHERE source_id = ? "
+				+ ") "
 				+ "ORDER BY episode_index ";
-		Object[] params = new Object[] { sourceId };
+		Object[] params = new Object[] { sourceId, sourceId };
 		return DBHelper.getInstance().query(sql, params);
 	}
 
