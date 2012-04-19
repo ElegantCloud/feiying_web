@@ -261,9 +261,9 @@ public class User {
 			if (businessStatus != null) {
 				log.info("existed user");
 				status = businessStatus;
-				if (brand.equals("apple")) {
-					status = "opened";
-				}
+//				if (brand.equals("apple")) {
+//					status = "opened";
+//				}
 				// update userkey in database
 				sql = "UPDATE fy_user SET userkey=? WHERE username=?";
 				DBHelper.getInstance().update(sql,

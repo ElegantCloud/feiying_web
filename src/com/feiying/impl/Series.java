@@ -95,18 +95,18 @@ public class Series {
 	 */
 	public static List<Map<String, Object>> getEpisodeList(String sourceId)
 			throws SQLException {
-		String sql = "SELECT source_id," 
-				+ "time," 
-				+ "size," 
-				+ "episode_index,"
-				+ "image_url," 
+		String sql = "SELECT source_id, " 
+				+ "time, " 
+				+ "size, " 
+				+ "episode_index, "
+				+ "image_url, " 
 				+ "video_url " 
 				+ "FROM fy_tv_episode "
 				+ "WHERE source_id = ? " 
 				+ "AND episode_index BETWEEN 1 AND "
 				+ "( "
-				+ "SELECT episode_count FROM fy_tv_series "
-				+ "WHERE source_id = ? "
+				+ "SELECT max(episode_index) FROM fy_tv_episode "
+				+ "WHERE source_id = ? AND status >= 100 "
 				+ ") "
 				+ "ORDER BY episode_index ";
 		Object[] params = new Object[] { sourceId, sourceId };

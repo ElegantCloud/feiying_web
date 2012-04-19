@@ -30,6 +30,7 @@ public class InfoMobile {
 			info = Series.getSeriesBySourceId(sourceId);
 			List<Map<String, Object>> list = Series.getEpisodeList(sourceId);
 			info.put("list", list);
+			info.put("episode_count", list.size());
 		} else {
 			info = Video.getVideoBySourceId(sourceId);
 		}

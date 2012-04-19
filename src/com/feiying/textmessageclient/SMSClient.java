@@ -60,7 +60,7 @@ public class SMSClient {
 	}
 	
 	public void sendValidateCode(String phone, String validateCode) throws IOException, ParserConfigurationException, SAXException{
-		String content = "验证码：" + validateCode + " [联通飞讯]";
+		String content = "验证码：" + validateCode + " [联通飞影]";
 		TextMessageResponse res = sendTextMessage(phone, content);
 		log.info("sms gateway return: " + res.getCode());
 	}
