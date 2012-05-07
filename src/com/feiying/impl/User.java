@@ -253,7 +253,7 @@ public class User {
 	public static JSONObject getUserInfo(String phone, String brand) {
 		JSONObject obj = new JSONObject();
 		String userkey = MD5Util.md5(RandomString.genRandomChars(6));
-		String status = "opened";
+		String status = "unopened";
 		String sql = "SELECT business_status AS status FROM fy_user WHERE username = ?";
 		try {
 			String businessStatus = DBHelper.getInstance().scalar(sql, new Object[] { phone });
