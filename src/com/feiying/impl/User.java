@@ -270,9 +270,9 @@ public class User {
 						new Object[] { userkey, phone });
 			} else {
 				log.info("new user");
-				if (brand.equals("apple")) {
-					status = "opened";
-				}
+//				if (brand.equals("apple")) {
+//					status = "opened";
+//				}
 				sql = "INSERT INTO fy_user (username, userkey) VALUES(?,?)";
 				DBHelper.getInstance().update(sql,
 						new Object[] { phone, userkey });
