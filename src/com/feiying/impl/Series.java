@@ -33,7 +33,7 @@ public class Series {
 				+ "FROM fy_tv_series t "
 				+ "LEFT JOIN fy_video v ON t.source_id = v.source_id "
 				+ "WHERE v.status >= 100 "
-				+ "ORDER BY t.release_date DESC";
+				+ "ORDER BY v.created_time DESC";
 		return DBHelper.getInstance().queryPager(sql, currPage, pageSize);
 	}
 

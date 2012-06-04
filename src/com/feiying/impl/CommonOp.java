@@ -46,9 +46,24 @@ public class CommonOp {
 	public static void saveFeedback(String user, String comment, String type) {
 		String sql = "INSERT INTO fy_feedback(user, comment, type) VALUES(?,?,?)";
 		try {
-			DBHelper.getInstance().update(sql, new Object[]{user, comment, type});
+			DBHelper.getInstance().update(sql,
+					new Object[] { user, comment, type });
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * get user business status
+	 * 
+	 * @param username
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static String getBusinessStatus(String username) throws SQLException {
+		String sql = "SELECT business_status AS status FROM fy_user WHERE username=?";
+		String status = DBHelper.getInstance().scalar(sql,
+				new Object[] { username });
+		return status;
 	}
 }

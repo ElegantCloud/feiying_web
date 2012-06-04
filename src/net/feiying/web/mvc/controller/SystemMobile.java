@@ -1,6 +1,7 @@
 package net.feiying.web.mvc.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,17 +14,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.feiying.impl.CommonOp;
 import com.feiying.impl.User;
 
 @Controller
 @RequestMapping("/mobile/system")
 public class SystemMobile {
+	private static String TEST_ACCOUNT = "138123";
+	private static String TEST_CODE = "123456";
 
 	private static Log log = LogFactory.getLog(VideoMobile.class);
 
 	@RequestMapping("/login")
+	@Deprecated
 	public void login(
 			@RequestParam(value = "loginName") String loginName,
 			@RequestParam(value = "loginPwd") String loginPwd,
@@ -55,7 +61,14 @@ public class SystemMobile {
 			HttpServletResponse response, HttpSession session) throws Exception {
 		JSONObject jsonUser = new JSONObject();
 		try {
-			String result = User.getPhoneCode(session, phone);
+			String result = "0";
+			// temporal code for test
+			if (TEST_ACCOUNT.equals(phone)) {
+				session.setAttribute("phonenumber", phone);
+				session.setAttribute("phonecode", TEST_CODE);
+			} else {
+				result = User.getPhoneCode(session, phone);
+			}
 			jsonUser.put("result", result);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -64,6 +77,7 @@ public class SystemMobile {
 	};
 
 	@RequestMapping("/checkPhoneCode")
+	@Deprecated
 	public void checkPhoneCode(@RequestParam(value = "code") String code,
 			HttpServletResponse response, HttpSession session) throws Exception {
 		JSONObject jsonUser = new JSONObject();
@@ -82,6 +96,7 @@ public class SystemMobile {
 	};
 
 	@RequestMapping("/regUser")
+	@Deprecated
 	public void regUser(@RequestParam(value = "password") String password,
 			@RequestParam(value = "password1") String password1,
 			HttpServletResponse response, HttpSession session) throws Exception {
@@ -125,8 +140,8 @@ public class SystemMobile {
 					if (phone != null) {
 						JSONObject info = User.getUserInfo(phone, brand);
 						jsonUser.put("info", info);
-						User.recodeDeviceInfo(phone, brand, model, release, sdk, width,
-								height);
+						User.recodeDeviceInfo(phone, brand, model, release,
+								sdk, width, height);
 					} else {
 						result = "6"; // session过期
 					}
@@ -135,7 +150,7 @@ public class SystemMobile {
 			} else {
 				result = "6"; // session timeout
 			}
-			
+
 			jsonUser.put("result", result);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -145,8 +160,19 @@ public class SystemMobile {
 
 	@ResponseStatus(HttpStatus.OK)
 	@RequestMapping("/auth")
-	public void authenticate() {
-		
+	public @ResponseBody
+	String authenticate(
+			@RequestParam(value = "username", required = true) String username) {
+		JSONObject ret = new JSONObject();
+		try {
+			String status = CommonOp.getBusinessStatus(username);
+			ret.put("status", status);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return ret.toString();
 	}
-	
+
 }

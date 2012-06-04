@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.feiying.db.DBHelper;
+import com.feiying.impl.CommonOp;
 
 @Controller
 @RequestMapping("/business")
@@ -37,15 +38,12 @@ public class BusinessController {
 	}
 
 	@RequestMapping("/getstatus")
-	@Deprecated
 	public @ResponseBody
 	String getBusinessStatus(
 			@RequestParam(value = "username", required = true) String username) {
-		String sql = "SELECT business_status AS status FROM fy_user WHERE username=?";
 		JSONObject ret = new JSONObject();
 		try {
-			String status = DBHelper.getInstance().scalar(sql,
-					new Object[] { username });
+			String status = CommonOp.getBusinessStatus(username);
 			ret.put("status", status);
 		} catch (SQLException e) {
 			e.printStackTrace();
