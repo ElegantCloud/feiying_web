@@ -23,7 +23,7 @@ import com.feiying.impl.User;
 @Controller
 @RequestMapping("/mobile/system")
 public class SystemMobile {
-	private static String TEST_ACCOUNT = "138123";
+	private static String TEST_ACCOUNT = "123456";
 	private static String TEST_CODE = "123456";
 
 	private static Log log = LogFactory.getLog(VideoMobile.class);

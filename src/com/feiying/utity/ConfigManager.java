@@ -131,4 +131,9 @@ public class ConfigManager {
 	public String getSphinxIndex() {
 		return prop.getProperty("sphinx_index", "feiying_mysql");
 	}
+	
+	public String getAttribute(String name){
+		return prop.getProperty(name);
+	}
+	
 }
