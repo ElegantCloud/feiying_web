@@ -11,10 +11,13 @@
 		</p>
 	</div>
 	<div class="download">
+		<p>
+		下载客户端请点击
+		</p>
 		<a href="/feiying/appget/android"><img
 			src="/feiying/images/download1.png" />
 		</a> 
 		<a href="/feiying/appget/iphone"><img src="/feiying/images/download2.png" />
-		</a>
+		</a>(仅限iPhone越狱用户)
 	</div>
 </div>

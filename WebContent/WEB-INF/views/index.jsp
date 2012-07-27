@@ -23,13 +23,16 @@
 					</p>
 				</div>
 				<div class="xiazai">
+					<p>
+					下载客户端请点击
+					</p>
 					<ul>
 						<li><a href="/feiying/appget/android"><img
 								src="/feiying/images/download1.png" />
 						</a>
 						</li>
 						<li><a href="/feiying/appget/iphone"><img src="/feiying/images/download2.png" />
-						</a>
+						</a>(仅限iPhone越狱用户)
 						</li>
 					</ul>
 				</div>
