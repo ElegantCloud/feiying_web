@@ -13,7 +13,8 @@
 	<div class="download">
 		<a href="/feiying/appget/android"><img
 			src="/feiying/images/download1.png" />
-		</a> <a href="#"><img src="/feiying/images/download2.png" />
+		</a> 
+		<a href="/feiying/appget/iphone"><img src="/feiying/images/download2.png" />
 		</a>
 	</div>
 </div>

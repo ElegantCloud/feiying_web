@@ -24,9 +24,9 @@ import com.feiying.impl.Series;
 import com.feiying.impl.Video;
 
 @Controller
-public class FeixunController {
+public class FeiyingController {
 
-	private static Log log = LogFactory.getLog(FeixunController.class);
+	private static Log log = LogFactory.getLog(FeiyingController.class);
 	public static final int pageSize = 20;
 
 	@RequestMapping("")
