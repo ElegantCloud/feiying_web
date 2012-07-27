@@ -38,6 +38,11 @@ public class FeiyingController {
 	public String mobile() throws Exception {
 		return "mobileIndex";
 	}
+	
+	@RequestMapping("/support")
+	public String support() {
+		return "support";
+	}
 
 	@RequestMapping("/play/{channel}/{sourceId}")
 	public ModelAndView play(@PathVariable String sourceId,
