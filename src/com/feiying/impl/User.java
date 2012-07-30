@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import org.xml.sax.SAXException;
 
 import com.feiying.db.DBHelper;
-import com.feiying.textmessageclient.SMSClient;
+import com.feiying.textmessageclient.SGIPClient;
 import com.feiying.utity.MD5Util;
 import com.feiying.utity.RandomString;
 import com.feiying.utity.ValidatePattern;
@@ -39,7 +39,7 @@ public class User {
 		try {
 			session.setAttribute("phonenumber", phone);
 			session.setAttribute("phonecode", phoneCode);
-			SMSClient.getInstance().sendValidateCode(phone, phoneCode);
+			SGIPClient.getInstance().sendValidateCode(phone, phoneCode);
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
