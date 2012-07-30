@@ -4,9 +4,11 @@ import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.SAXException;
@@ -32,8 +34,16 @@ public class SGIPClient {
 
 	public int sendSMS(String phoneNumber, String msg) {
 		int retCode = 0;
-		String cmd = "python " + sgipClientPath + " -n " + phoneNumber + " -m "
-				+ msg;
+		String base64Msg;
+		try {
+			base64Msg = Base64.encodeBase64String(msg.getBytes("UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+			base64Msg = Base64.encodeBase64String(msg.getBytes());
+		}
+		
+		String cmd = "python " + sgipClientPath + " -n " + phoneNumber + " -b "
+				+ base64Msg;
 		log.info("send sms cmd: " + cmd);
 		Runtime run = Runtime.getRuntime();// 返回与当前 Java 应用程序相关的运行时对象
 		try {
@@ -43,7 +53,7 @@ public class SGIPClient {
 			String lineStr;
 			while ((lineStr = inBr.readLine()) != null)
 				// 获得命令执行后在控制台的输出信息
-				log.info(lineStr);// 打印输出信息
+				log.debug(lineStr);// 打印输出信息
 			// 检查命令是否执行失败。
 			retCode = p.waitFor();
 			if (retCode != 0) {
@@ -59,7 +69,7 @@ public class SGIPClient {
 	}
 
 	public void sendValidateCode(String phone, String validateCode) throws IOException, ParserConfigurationException, SAXException{
-		String content = "验证码：" + validateCode + " [联通飞影]";
+		String content = "验证码：" + validateCode + "[联通飞影]";
 		int ret = sendSMS(phone, content);
 		log.info("sgip gateway return: " + ret);
 	}
